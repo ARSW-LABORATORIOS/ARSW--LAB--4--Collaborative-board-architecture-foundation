@@ -4,6 +4,7 @@ import edu.eci.arsw.collabboard.application.exception.BoardNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -32,10 +33,18 @@ public class GlobalExceptionHandler {
         return error(HttpStatus.BAD_REQUEST, "INVALID_INPUT", ex.getMessage(), request.getRequestURI());
     }
 
-    @ExceptionHandler(UnsupportedOperationException.class)
-    public ResponseEntity<ApiError> starterTodo(UnsupportedOperationException ex, HttpServletRequest request) {
-        // This handler makes the incomplete starter explicit instead of leaking a stack trace.
-        return error(HttpStatus.NOT_IMPLEMENTED, "LAB_NOT_IMPLEMENTED", ex.getMessage(), request.getRequestURI());
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ApiError> malformedRequestBody(HttpMessageNotReadableException ex, HttpServletRequest request) {
+        Throwable cause = ex.getMostSpecificCause();
+        if (cause instanceof IllegalArgumentException) {
+            return error(HttpStatus.BAD_REQUEST, "INVALID_INPUT", cause.getMessage(), request.getRequestURI());
+        }
+        return error(HttpStatus.BAD_REQUEST, "MALFORMED_REQUEST", "Request body is missing or malformed", request.getRequestURI());
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiError> unexpectedError(Exception ex, HttpServletRequest request) {
+        return error(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_ERROR", "Unexpected server error", request.getRequestURI());
     }
 
     private ResponseEntity<ApiError> error(HttpStatus status, String code, String message, String path) {
