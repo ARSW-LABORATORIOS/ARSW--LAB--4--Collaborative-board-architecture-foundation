@@ -1,5 +1,13 @@
 # ARSW Collaborative Architecture Board — Lab 04 
 
+## Team
+
+| Student                     | ID         | GitHub   |
+|-----------------------------|------------|----------|
+| Mabel Fernanda Bernal Amaya | 1000100629 | MabelBernalAmaya |
+| Nicolas David Prieto Ramos  | 1000091873 | NicolasPrieto12  |
+| Juan Eduardo Vera Acero     | 1000091871 | JUNE2908 |
+
 This repository contains the implementation of **Lab #4 — Architecture Foundation**.
 
 The goal is **not** to practice REST syntax. The goal is to build a small backend with explicit architectural boundaries, dependency inversion, constructor injection, consistent error handling, tests, and architecture evidence.
