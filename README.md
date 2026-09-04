@@ -67,3 +67,8 @@ BUILD SUCCESS
 ## Continuity rule
 
 Your completed Lab 04 repository becomes the conceptual baseline for **Lab 05 — Interactive Board**. Avoid unnecessary changes to contracts and package boundaries.
+
+## Architecture Evidence — Lab 04
+
+- [Architecture diagrams (ArchiMate + Class diagram)](docs/architecture/README.md)
+- [API contract, ADR and AI usage](docs/)
