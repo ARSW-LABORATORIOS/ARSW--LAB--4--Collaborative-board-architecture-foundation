@@ -1,6 +1,6 @@
-# ARSW Collaborative Architecture Board — Lab 04 Starter
+# ARSW Collaborative Architecture Board — Lab 04 
 
-This repository is the starting point for **Lab #4 — Architecture Foundation**.
+This repository contains the implementation of **Lab #4 — Architecture Foundation**.
 
 The goal is **not** to practice REST syntax. The goal is to build a small backend with explicit architectural boundaries, dependency inversion, constructor injection, consistent error handling, tests, and architecture evidence.
 
@@ -11,7 +11,7 @@ The goal is **not** to practice REST syntax. The goal is to build a small backen
 - Maven
 - In-memory persistence for this lab
 
-## Target architecture
+## Architecture
 
 ```text
 REST Controller
@@ -25,42 +25,25 @@ BoardRepository (port)
       v
 InMemoryBoardRepository (adapter)
 ```
+## REST API
 
-## What is already provided
+The application provides the following Board operations:
 
-- Project and package structure.
-- Domain types: `Board`, `BoardElement`, `ElementType`.
-- Persistence port and in-memory adapter shell.
-- Application service shell.
-- REST controller shell.
-- Central error contract.
-- Documentation templates.
-- Disabled tests that describe expected behavior.
+- `POST /api/boards` — Create a new Board.
+- `GET /api/boards/{boardId}` — Get an existing Board.
+- `PUT /api/boards/{boardId}` — Replace the state of an existing Board.
 
-## What you must complete
-
-Search for `TODO LAB-04` in the repository.
-
-At minimum, complete:
-
-1. `BoardRepository` operations required by the use cases.
-2. `InMemoryBoardRepository` behavior.
-3. `BoardApplicationService` use cases.
-4. REST request validation and controller behavior.
-5. Consistent error mapping.
-6. Unit and HTTP-facing tests.
-7. `docs/api-contract.md`.
-8. Architecture diagrams in `docs/architecture/`.
-9. `docs/ADR-001-repository-boundary.md`.
-10. `docs/AI_USAGE.md`.
-
+The complete API contract and error responses are 
+documented in `docs/api-contract.md`.
 ## Run
+
+From the project root, run:
 
 ```bash
 mvn spring-boot:run
 ```
 
-The starter includes a small landing page at:
+The application includes a small landing page at:
 
 ```text
 http://localhost:8080/
@@ -72,7 +55,14 @@ http://localhost:8080/
 mvn test
 ```
 
-The included specification tests are disabled initially. Enable them progressively as you implement the required behavior.
+The current implementation have 12 automated tests.
+
+Expected result:
+
+```text
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0
+BUILD SUCCESS
+```
 
 ## Continuity rule
 
